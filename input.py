@@ -1,13 +1,10 @@
-import pandas as pd
-
-def input_from_excel(path):
-    df = pd.read_excel(path, header=5)
-    df=df[['# ユーザID','１．システム情報科学に関する高い専門能力（コース共通）',
-           '１．システム情報科学に関する高い専門能力（コース専門能力）',
-           '１．システム情報科学に関する高い専門能力（卒業研究）',
-           '２．研究的態度を支える問題探究力・構想力',
-           '３．共創のための情報表現能力・チームワーク力',
-           '４．自律的に学び続けるためのメタ学習力',
-           '５．専門家として持つべき人間性',]]
-    return(df)
-
+import glob
+def input_from_excel():
+    files=[]
+    path = '*期.xlsx'
+    list1 = glob.glob(path)
+    for l in list1:
+        files.append(l)
+    print(files)
+    return(files)
+#input_from_excel()
