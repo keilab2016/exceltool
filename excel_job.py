@@ -2,6 +2,7 @@ from input import input_from_excel
 from output import output_graph
 import numpy as np
 import pandas as pd
+import section
 import itertools
 import sys
 
@@ -25,13 +26,9 @@ for a ,b in enumerate(args_list):
 
     for i, j in enumerate(files):
         df=pd.read_excel('%s'%files[i],header=5)
-        df1=df[['# ユーザID','１．システム情報科学に関する高い専門能力（コース共通）',
-           '１．システム情報科学に関する高い専門能力（コース専門能力）',
-           '１．システム情報科学に関する高い専門能力（卒業研究）',
-           '２．研究的態度を支える問題探究力・構想力',
-           '３．共創のための情報表現能力・チームワーク力',
-           '４．自律的に学び続けるためのメタ学習力',
-           '５．専門家として持つべき人間性']]
+        if(section.sectionList[0] != '# ユーザID'):  #複数グラフを作る場合、sectionリストの要素が減り続けるのを防ぐ
+            section.sectionList.insert(0,'# ユーザID')
+        df1=df[section.sectionList] #section.pyから列名のリストを取得
         #excelをdataframe化したdf1とuseridが一致するものをdataframe型で抽出
         data=df1[df1['# ユーザID'].isin([userid])]
 
@@ -46,4 +43,4 @@ for a ,b in enumerate(args_list):
         del data3[0]
         list_data.append(data3)
 print(list_data)
-        #output_graph(list_data)
+output_graph(list_data)
