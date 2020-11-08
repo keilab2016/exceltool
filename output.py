@@ -1,20 +1,18 @@
 import openpyxl
+import section
 import matplotlib.pyplot as plt
 from matplotlib import rcParams
 rcParams['font.family'] = 'sans-serif'
 rcParams['font.sans-serif'] = ['Hiragino Maru Gothic Pro', 'Yu Gothic', 'Meirio', 'Takao', 'IPAexGothic', 'IPAPGothic', 'VL PGothic', 'Noto Sans CJK JP']
 from PIL import Image
 import itertools
+
+sectionBar = section.sectionList
 def output_graph(list_data):
     # グラフの描画先の準備
     fig = plt.figure(figsize=(35,10), dpi=100)
-    left = ['１．システム情報科学に関する高い専門能力（コース共通）',
-         '１．システム情報科学に関する高い専門能力（コース専門能力）',
-         '１．システム情報科学に関する高い専門能力（卒業研究）',
-         '２．研究的態度を支える問題探究力・構想力',
-         '３．共創のための情報表現能力・チームワーク力',
-         '４．自律的に学び続けるためのメタ学習力',
-         '５．専門家として持つべき人間性']
+    section.sectionList.pop(0)
+    left = section.sectionList
         #折れ線グラフ
     plt.ylim(0,7)
     p1=plt.plot(left, list_data[0], marker="D", markersize=12, markeredgewidth=3, markeredgecolor="blue",
