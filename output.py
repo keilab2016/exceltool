@@ -11,7 +11,10 @@ import math
 
 def output_graph(list_data): #list_dataに入れたいデータ
     fig = plt.figure(figsize=(35,10), dpi=100)
+    title = section.sectionList.pop(0)
     left = section.sectionList
+    print(title)
+    
     X_label = ['年度1',
             '年度2',
             '年度3',
