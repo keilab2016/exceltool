@@ -1,4 +1,5 @@
 import openpyxl
+import section
 import matplotlib.pyplot as plt
 from matplotlib import rcParams
 rcParams['font.family'] = 'sans-serif'
@@ -10,13 +11,7 @@ import math
 
 def output_graph(list_data): #list_dataに入れたいデータ
     fig = plt.figure(figsize=(35,10), dpi=100)
-    left = ['１．システム情報科学に関する高い専門能力（コース共通）',
-         '１．システム情報科学に関する高い専門能力（コース専門能力）',
-         '１．システム情報科学に関する高い専門能力（卒業研究）',
-         '２．研究的態度を支える問題探究力・構想力',
-         '３．共創のための情報表現能力・チームワーク力',
-         '４．自律的に学び続けるためのメタ学習力',
-         '５．専門家として持つべき人間性']
+    left = section.sectionList
     X_label = ['年度1',
             '年度2',
             '年度3',
