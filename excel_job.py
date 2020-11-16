@@ -5,8 +5,7 @@ import pandas as pd
 import section
 import itertools
 import sys
-
-list_data=[]
+import openpyxl
 
 #指定ディレクトリのexcelファイル名をlist型で取得
 files = input_from_excel()
@@ -20,10 +19,11 @@ args_list=list(map(str,args))
 #args_list[0]削除　0番には、ファイル名が入っているため
 del args_list[0]
 
+
 for a ,b in enumerate(args_list):
     #コマンド引数で指定された学籍番号を1つずつ挿入
     userid=args_list[a]
-
+    list_data=[]
     for i, j in enumerate(files):
         df=pd.read_excel('%s'%files[i],header=5)
         if(section.sectionList[0] != '# ユーザID'):  #複数グラフを作る場合、sectionリストの要素が減り続けるのを防ぐ
@@ -42,5 +42,5 @@ for a ,b in enumerate(args_list):
         #配列の0番（userid）を削除
         del data3[0]
         list_data.append(data3)
-print(list_data)
-output_graph(list_data)
+    output_graph(list_data,userid)
+    print(list_data)
