@@ -30,7 +30,7 @@ def output_graph(list_data,userid):
 
     graph_array = [[0 for j in range(7)] for j in range(7)]
     for list_two in range(7):
-        for list_one in range(2):
+        for list_one in range(7):
             graph_array[list_two][list_one] = (list_data[list_one][list_two])#配列のxとyを逆転
     print(graph_array)#確認用
     for num ,num2 in enumerate(X_label):

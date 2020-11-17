@@ -42,5 +42,5 @@ for a ,b in enumerate(args_list):
         #配列の0番（userid）を削除
         del data3[0]
         list_data.append(data3)
-    output_graph(list_data,userid)
     print(list_data)
+    output_graph(list_data,userid)
