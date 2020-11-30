@@ -1,6 +1,10 @@
 import openpyxl
 import section
 import matplotlib.pyplot as plt
+from openpyxl.styles.fonts import Font
+import pprint
+import label_year
+import os
 from matplotlib import rcParams
 rcParams['font.family'] = 'sans-serif'
 rcParams['font.sans-serif'] = ['Hiragino Maru Gothic Pro', 'Yu Gothic', 'Meirio', 'Takao', 'IPAexGothic', 'IPAPGothic', 'VL PGothic', 'Noto Sans CJK JP']
@@ -10,25 +14,26 @@ import math
 
 def make_plt(number,title,list_two,userid):
     #グラフの出力場所（セル番号）
-    cell_num=[8,23,38,4,19,34,49]
+    cell_num=[9,24,39,5,20,35,50]
 
     fig = plt.figure(figsize=(15,5), dpi=100)
-    X_label = ['年度1',
-            '年度2',
-            '年度3',
-            '年度4',
-            '年度5',
-            '年度6',
-            '年度7']
+    X_label = label_year.year_list
     plt.ylim(0,9)
     p = plt.plot(X_label,number,marker="D", markersize=12, markeredgewidth=3, markeredgecolor="peru",markerfacecolor="peru")
     #plt.title(title)
-    plt.xlabel("年度")
-    plt.ylabel("スコア")
+    #plt.xlabel("年度")
+    #plt.ylabel("スコア")
     plt.rcParams['axes.axisbelow']
     # 作成したチャートを画像出力
     fig.savefig('%s_%d.png'%(userid,list_two))#カレントディレクトリに「学籍番号_num.png」を保存
-    wb = openpyxl.Workbook()
+    user_check = userid
+    if(os.path.isfile('output/%s.xlsx'%userid)):
+        print("true")
+        wb = openpyxl.load_workbook('output/%s.xlsx'%userid)
+    else:
+        print("false") 
+        wb = openpyxl.load_workbook('output_Templete.xlsx')
+    sheet = wb.worksheets[0]
     ws = wb.active
     # ws = wb.worksheets[0]
     img = openpyxl.drawing.image.Image('%s_%d.png'%(userid,list_two))
@@ -48,5 +53,7 @@ def make_plt(number,title,list_two,userid):
         img.anchor = cell
         ws.add_image(img)
         #ws.add_image(img,'O%d'%cell_num[num])
-    wb.save('%s.xlsx'%userid)# output.pyで出力した.pngをout.xlsxに貼り付ける
+    sheet['B4'].font = Font(size=14)
+    sheet['B4'] = '%sさん の学習達成度推移です。'%userid
+    wb.save('output/%s.xlsx'%userid)# output.pyで出力した.pngをout.xlsxに貼り付ける
     plt.close()
