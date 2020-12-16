@@ -25,7 +25,7 @@ def make_plt(number,title,list_two,userid):
     #plt.ylabel("スコア")
     plt.rcParams['axes.axisbelow']
     # 作成したチャートを画像出力
-    fig.savefig('%s_%d.png'%(userid,list_two))#カレントディレクトリに「学籍番号_num.png」を保存
+    fig.savefig('image/%s_%d.png'%(userid,list_two))#カレントディレクトリに「学籍番号_num.png」を保存
     user_check = userid
     if(os.path.isfile('output/%s.xlsx'%userid)):
         print("true")
@@ -36,7 +36,7 @@ def make_plt(number,title,list_two,userid):
     sheet = wb.worksheets[0]
     ws = wb.active
     # ws = wb.worksheets[0]
-    img = openpyxl.drawing.image.Image('%s_%d.png'%(userid,list_two))
+    img = openpyxl.drawing.image.Image('image/%s_%d.png'%(userid,list_two))
     img.width = 72 * 7
     img.height = 25 * 10
     if list_two < 3:
