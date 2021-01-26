@@ -18,8 +18,8 @@ def make_plt(number,title,list_two,userid):
 
     fig = plt.figure(figsize=(15,5), dpi=100)
     X_label = label_year.year_list
-    plt.ylim(0,9)
-    p = plt.plot(X_label,number,marker="D", markersize=12, markeredgewidth=3, markeredgecolor="peru",markerfacecolor="peru")
+    plt.ylim(1,7)
+    p = plt.plot(X_label,number,marker="o", markersize=3)
     #plt.title(title)
     #plt.xlabel("年度")
     #plt.ylabel("スコア")
