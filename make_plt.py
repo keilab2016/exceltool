@@ -2,9 +2,11 @@ import openpyxl
 import section
 import matplotlib.pyplot as plt
 from openpyxl.styles.fonts import Font
+import numpy as np
 import pprint
 import label_year
 import os
+import input
 from matplotlib import rcParams
 rcParams['font.family'] = 'sans-serif'
 rcParams['font.sans-serif'] = ['Hiragino Maru Gothic Pro', 'Yu Gothic', 'Meirio', 'Takao', 'IPAexGothic', 'IPAPGothic', 'VL PGothic', 'Noto Sans CJK JP']
@@ -17,9 +19,23 @@ def make_plt(number,title,list_two,userid):
     cell_num=[9,24,39,5,20,35,50]
 
     fig = plt.figure(figsize=(15,5), dpi=100)
-    X_label = label_year.year_list
+    X_label = label_year.x_list
+    print(X_label)
     plt.ylim(1,7)
-    p = plt.plot(X_label,number,marker="o", markersize=3)
+
+    #Noneの場合は描画しないようにする
+    arrenged_number = []
+    for n in number: 
+        if(n == None):
+            arrenged_number.append(np.nan)
+        else:
+            arrenged_number.append(n)
+
+    print("arrenged")
+    print(arrenged_number)
+
+    p = plt.plot(X_label,arrenged_number,marker="o", markersize=3)
+    
     #plt.title(title)
     #plt.xlabel("年度")
     #plt.ylabel("スコア")

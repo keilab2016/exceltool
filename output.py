@@ -12,12 +12,12 @@ from make_plt import make_plt
 def output_graph(list_data,userid):
     title = section.sectionList.pop(0)
     left = section.sectionList
-    #print(title)
+    print(left)
     print(userid)
 
-    graph_array = [[0 for j in range(7)] for j in range(7)]
+    graph_array = [[0 for j in range(9)] for j in range(9)]
     for list_two in range(7):
-        for list_one in range(7):
+        for list_one in range(9):
             graph_array[list_two][list_one] = (list_data[list_one][list_two])#配列のxとyを逆転
+        
         make_plt(graph_array[list_two],left[list_two],list_two,userid)
-    print(graph_array)#確認用
