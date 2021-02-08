@@ -7,7 +7,15 @@ import section
 import itertools
 import sys
 import openpyxl
+import os
 
+#ディレクトリが存在していなければ作成
+if(os.path.exists('image') == False):
+    os.mkdir('image')
+
+if(os.path.exists('output') == False):
+    os.mkdir('output')
+ 
 #コマンド引数を取得
 args = sys.argv
 
