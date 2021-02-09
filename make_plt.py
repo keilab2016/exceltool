@@ -21,7 +21,7 @@ def make_plt(number,title,list_two,userid):
     fig = plt.figure(figsize=(15,5), dpi=100)
     X_label = label_year.x_list
     print(X_label)
-    plt.ylim(1,7)
+    plt.ylim(0.5,7.5)
 
     #Noneの場合は描画しないようにする
     arrenged_number = []
@@ -33,9 +33,11 @@ def make_plt(number,title,list_two,userid):
 
     print("arrenged")
     print(arrenged_number)
-
-    p = plt.plot(X_label,arrenged_number,marker="o", markersize=3)
-    
+    plt.grid(True)
+    p = plt.plot(X_label,arrenged_number,linewidth = 2,marker="o", markersize=9,markerfacecolor="orange")
+    plt.xticks(rotation="30")
+    plt.rcParams["font.size"] = 15
+    plt.tight_layout()
     #plt.title(title)
     #plt.xlabel("年度")
     #plt.ylabel("スコア")
@@ -53,8 +55,8 @@ def make_plt(number,title,list_two,userid):
     ws = wb.active
     # ws = wb.worksheets[0]
     img = openpyxl.drawing.image.Image('image/%s_%d.png'%(userid,list_two))
-    img.width = 72 * 7
-    img.height = 25 * 10
+    img.width = 72 * 8
+    img.height = 25 * 11
     if list_two < 3:
 
         row_number = cell_num[list_two]
