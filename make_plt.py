@@ -18,10 +18,12 @@ def make_plt(number,title,list_two,userid):
     #グラフの出力場所（セル番号）
     cell_num=[9,24,39,5,20,35,50]
 
-    fig = plt.figure(figsize=(15,5), dpi=100)
+    fig = plt.figure(figsize=(6.5,2.6), dpi=200)
     X_label = label_year.x_list
     print(X_label)
-    plt.ylim(0.5,7.5)
+    plt.rcParams["font.size"] = 15
+    plt.ylim(0,7.5)
+    plt.yticks([1,3,5,7])
 
     #Noneの場合は描画しないようにする
     arrenged_number = []
@@ -36,7 +38,6 @@ def make_plt(number,title,list_two,userid):
     plt.grid(True)
     p = plt.plot(X_label,arrenged_number,linewidth = 2,marker="o", markersize=9,markerfacecolor="orange")
     plt.xticks(rotation="30")
-    plt.rcParams["font.size"] = 15
     plt.tight_layout()
     #plt.title(title)
     #plt.xlabel("年度")
@@ -55,19 +56,19 @@ def make_plt(number,title,list_two,userid):
     ws = wb.active
     # ws = wb.worksheets[0]
     img = openpyxl.drawing.image.Image('image/%s_%d.png'%(userid,list_two))
-    img.width = 72 * 8
-    img.height = 25 * 11
+    img.width = 625
+    img.height = 250
     if list_two < 3:
 
         row_number = cell_num[list_two]
-        cell = ws.cell(row=row_number, column=3).coordinate#セルの位置を指定（column=3はC列のこと
+        cell = ws.cell(row=row_number, column=2).coordinate#セルの位置を指定（column=3はC列のこと
         img.anchor = cell
         ws.add_image(img)
         #ws.add_image(img,'C%d'%cell_num[num])
     else:
         
         row_number = cell_num[list_two]
-        cell = ws.cell(row=row_number, column=15).coordinate
+        cell = ws.cell(row=row_number, column=14).coordinate
         img.anchor = cell
         ws.add_image(img)
         #ws.add_image(img,'O%d'%cell_num[num])
