@@ -41,7 +41,10 @@ for a ,b in enumerate(args_list):
             df=pd.read_excel('%s'%files[i],header=5)
             if(section.sectionList[0] != '# ユーザID'):  #複数グラフを作る場合、sectionリストの要素が減り続けるのを防ぐ
                 section.sectionList.insert(0,'# ユーザID')
-            df1=df[section.sectionList] #section.pyから列名のリストを取得
+            try:
+                df1=df[section.sectionList] #section.pyから列名のリストを取得
+            except KeyError:
+                df1=df[section.sectionList1] #section.pyから列名のリストを取得
             #excelをdataframe化したdf1とuseridが一致するものをdataframe型で抽出
             data=df1[df1['# ユーザID'].isin([userid])]
 
