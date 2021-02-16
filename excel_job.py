@@ -63,7 +63,7 @@ for a ,b in enumerate(args_list):
                 if(d == 0):
                     data4.append(None)
                 else:
-                    data4.append(d)
+                    data4.append(d % 8)
 
             print(data4)
 
