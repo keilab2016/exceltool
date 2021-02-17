@@ -14,7 +14,7 @@ def make_year_list(admission_year):
             x_list_data.append(str(year_list[i]) + "年後期")
         else:
             x_list_data.append(str(year_list[i]) + "年前期")
-    x_list_data.append(str(year) + "年卒業")
+    x_list_data.append(str(year) + "年卒業時")
     label_year.x_list = x_list_data
 
 
