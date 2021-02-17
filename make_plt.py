@@ -37,7 +37,7 @@ def make_plt(number,title,list_two,userid):
     print(arrenged_number)
     plt.grid(True)
     p = plt.plot(X_label,arrenged_number,linewidth = 2,marker="o", markersize=9,markerfacecolor="orange")
-    plt.xticks(rotation="30")
+    plt.xticks(X_label, rotation="30")
     plt.tight_layout()
     #plt.title(title)
     #plt.xlabel("年度")
