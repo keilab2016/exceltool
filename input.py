@@ -1,5 +1,5 @@
 import glob
-import label_year 
+#import label_year 
 year_list = []
 term_list = ["年度前期_回答データ", "年度後期_回答データ"]
 x_list_data = []
@@ -15,13 +15,13 @@ def make_year_list(admission_year):
         else:
             x_list_data.append(str(year_list[i]) + "年前期")
     x_list_data.append(str(year) + "年卒業時")
-    label_year.x_list = x_list_data
+    #label_year.x_list = x_list_data
 
 
 
 def input_from_excel(): #入学年を取得し、読み込むデータを決定
     print(year_list)
-    print(label_year.x_list)
+    #print(label_year.x_list)
     files=[]
     for i in range(8):
         if((i+1) % 2 == 0):
