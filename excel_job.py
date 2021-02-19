@@ -1,5 +1,5 @@
 from input import input_from_excel
-from input import make_year_list
+from input import input_path
 from output import output_graph
 import numpy as np
 import pandas as pd
@@ -32,12 +32,15 @@ for a ,b in enumerate(args_list):
     admission_year="20"+userid[3:5]
     print(admission_year)
     list_data=[]
-    make_year_list(admission_year)
     #指定ディレクトリのexcelファイル名をlist型で取得
     files = input_from_excel()
 
+    flist = []
     for i, j in enumerate(files):
         if(files[i]!=''): #20〇〇年○期のデータが存在する場合
+            fname = files[i].replace(input_path,'')
+            fname = fname.replace('_回答データ','')
+            flist.append(fname.replace('.xls',''))
             df=pd.read_excel('%s'%files[i],header=5)
             if(section.sectionList[0] != '# ユーザID'):  #複数グラフを作る場合、sectionリストの要素が減り続けるのを防ぐ
                 section.sectionList.insert(0,'# ユーザID')
@@ -68,7 +71,7 @@ for a ,b in enumerate(args_list):
             print(data4)
 
             list_data.append(data4)
-        else: #データが存在しない場合
-            list_data.append([None,None,None,None,None,None,None])
-    print(list_data)
-    output_graph(list_data,userid)
+        #else: #データが存在しない場合
+        #    list_data.append([None,None,None,None,None,None,None])
+    print(flist,list_data)
+    output_graph(flist,list_data,userid)
