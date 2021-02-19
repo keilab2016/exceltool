@@ -1,5 +1,6 @@
 from input import input_from_excel
 from input import make_year_list
+from input import input_path
 from output import output_graph
 import numpy as np
 import pandas as pd
@@ -39,7 +40,7 @@ for a ,b in enumerate(args_list):
     flist = []
     for i, j in enumerate(files):
         if(files[i]!=''): #20〇〇年○期のデータが存在する場合
-            fname = files[i].replace('Templete/','')
+            fname = files[i].replace(input_path,'')
             fname = fname.replace('_回答データ','')
             flist.append(fname.replace('.xls',''))
             df=pd.read_excel('%s'%files[i],header=5)
