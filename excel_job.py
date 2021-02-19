@@ -1,5 +1,4 @@
 from input import input_from_excel
-from input import make_year_list
 from input import input_path
 from output import output_graph
 import numpy as np
@@ -33,7 +32,6 @@ for a ,b in enumerate(args_list):
     admission_year="20"+userid[3:5]
     print(admission_year)
     list_data=[]
-    make_year_list(admission_year)
     #指定ディレクトリのexcelファイル名をlist型で取得
     files = input_from_excel()
 
