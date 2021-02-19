@@ -8,6 +8,7 @@ import itertools
 import sys
 import openpyxl
 import os
+import re
 
 #ディレクトリが存在していなければ作成
 if(os.path.exists('image') == False):
@@ -28,8 +29,8 @@ del args_list[0]
 
 for a ,b in enumerate(args_list):
     #コマンド引数で指定された学籍番号を1つずつ挿入
-    userid=args_list[a]
-    admission_year="20"+userid[3:5]
+    userid=re.sub(r'^b','',args_list[a])
+    admission_year="20"+userid[2:4]
     print(admission_year)
     list_data=[]
     #指定ディレクトリのexcelファイル名をlist型で取得
@@ -49,7 +50,7 @@ for a ,b in enumerate(args_list):
             except KeyError:
                 df1=df[section.sectionList1] #section.pyから列名のリストを取得
             #excelをdataframe化したdf1とuseridが一致するものをdataframe型で抽出
-            data=df1[df1['# ユーザID'].isin([userid])]
+            data=df1[df1['# ユーザID'].isin(['b' + userid])]
 
             #data(dataframe型)をlist化（２次元配列になってしまう）
             data2=data.values.tolist()
