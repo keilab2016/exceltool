@@ -36,8 +36,12 @@ for a ,b in enumerate(args_list):
     #指定ディレクトリのexcelファイル名をlist型で取得
     files = input_from_excel()
 
+    flist = []
     for i, j in enumerate(files):
         if(files[i]!=''): #20〇〇年○期のデータが存在する場合
+            fname = files[i].replace('Templete/','')
+            fname = fname.replace('_回答データ','')
+            flist.append(fname.replace('.xls',''))
             df=pd.read_excel('%s'%files[i],header=5)
             if(section.sectionList[0] != '# ユーザID'):  #複数グラフを作る場合、sectionリストの要素が減り続けるのを防ぐ
                 section.sectionList.insert(0,'# ユーザID')
@@ -68,7 +72,7 @@ for a ,b in enumerate(args_list):
             print(data4)
 
             list_data.append(data4)
-        else: #データが存在しない場合
-            list_data.append([None,None,None,None,None,None,None])
-    print(list_data)
-    output_graph(list_data,userid)
+        #else: #データが存在しない場合
+        #    list_data.append([None,None,None,None,None,None,None])
+    print(flist,list_data)
+    output_graph(flist,list_data,userid)

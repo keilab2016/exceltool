@@ -9,7 +9,7 @@ import itertools
 import math
 from make_plt import make_plt 
 
-def output_graph(list_data,userid):
+def output_graph(flist,list_data,userid):
     num = len(list_data)
     title = section.sectionList.pop(0)
     left = section.sectionList
@@ -21,4 +21,4 @@ def output_graph(list_data,userid):
         for list_one in range(num):
             graph_array[list_two][list_one] = (list_data[list_one][list_two])#配列のxとyを逆転
         
-        make_plt(graph_array[list_two],left[list_two],list_two,userid)
+        make_plt(flist,graph_array[list_two],left[list_two],list_two,userid)

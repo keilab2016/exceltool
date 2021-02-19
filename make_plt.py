@@ -14,12 +14,13 @@ from PIL import Image
 import itertools
 import math
 
-def make_plt(number,title,list_two,userid):
+def make_plt(flist,number,title,list_two,userid):
     #グラフの出力場所（セル番号）
     cell_num=[9,24,39,5,20,35,50]
 
     fig = plt.figure(figsize=(6.5,2.6), dpi=200)
-    X_label = label_year.x_list
+    #X_label = label_year.x_list
+    X_label = flist
     print(X_label)
     plt.rcParams["font.size"] = 15
     plt.ylim(0,7.5)
