@@ -41,16 +41,23 @@ for a ,b in enumerate(args_list):
         if(files[i]!=''): #20〇〇年○期のデータが存在する場合
             fname = files[i].replace(input_path,'')
             fname = fname.replace('_回答データ','')
-            flist.append(fname.replace('.xls',''))
-            df=pd.read_excel('%s'%files[i],header=5)
-            if(section.sectionList[0] != '# ユーザID'):  #複数グラフを作る場合、sectionリストの要素が減り続けるのを防ぐ
-                section.sectionList.insert(0,'# ユーザID')
+            print(fname)
+            if fname.endswith('.xlsx'):
+                flist.append(fname.replace('.xlsx',''))
+                df=pd.read_excel('%s'%files[i])
+            else:
+                flist.append(fname.replace('.xls',''))
+                df=pd.read_excel('%s'%files[i],header=5)
+                if(section.sectionList1[0] != '# ユーザID'):  #複数グラフを作る場合、sectionリストの要素が減り続けるのを防ぐ
+                    section.sectionList1.insert(0,'# ユーザID')
             try:
                 df1=df[section.sectionList] #section.pyから列名のリストを取得
+                #excelをdataframe化したdf1とuseridが一致するものをdataframe型で抽出
+                data=df1[df1['ユーザ名'].isin(['b' + userid])]
             except KeyError:
                 df1=df[section.sectionList1] #section.pyから列名のリストを取得
-            #excelをdataframe化したdf1とuseridが一致するものをdataframe型で抽出
-            data=df1[df1['# ユーザID'].isin(['b' + userid])]
+                #excelをdataframe化したdf1とuseridが一致するものをdataframe型で抽出
+                data=df1[df1['# ユーザID'].isin(['b' + userid])]
 
             #data(dataframe型)をlist化（２次元配列になってしまう）
             data2=data.values.tolist()
