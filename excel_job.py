@@ -67,7 +67,7 @@ for a ,b in enumerate(args_list):
 
             data4 = []
             if len(data3)==0:
-                data4 = ['nan','nan','nan','nan','nan','nan','nan']
+                data4 = [np.nan,np.nan,np.nan,np.nan,np.nan,np.nan,np.nan]
             else:
                 #配列の0番（userid）を削除
                 del data3[0]
