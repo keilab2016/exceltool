@@ -65,16 +65,18 @@ for a ,b in enumerate(args_list):
             #1次元配列に戻す
             data3=list(itertools.chain.from_iterable(data2))
 
-            #配列の0番（userid）を削除
-            del data3[0]
-
-            #0をNoneに置き換える
             data4 = []
-            for d in data3:
-                if(d == 0):
-                    data4.append(None)
-                else:
-                    data4.append(d % 8)
+            if len(data3)==0:
+                data4 = ['nan','nan','nan','nan','nan','nan','nan']
+            else:
+                #配列の0番（userid）を削除
+                del data3[0]
+                #0をNoneに置き換える
+                for d in data3:
+                    if(d == 0):
+                        data4.append(None)
+                    else:
+                        data4.append(d % 8)
 
             print(data4)
 
