@@ -42,11 +42,9 @@ for path in input_from_excel():
         df=pd.read_excel('%s' % path, header=5)
         print('manaba',path)
     try:
-        secList=section.sectionList.copy()
-        df1=df[secList] #section.pyから列名のリストを取得
+        df1=df[section.sectionList] #section.pyから列名のリストを取得
     except KeyError:
-        secList=section.sectionList1.copy()
-        df1=df[secList] #section.pyから列名のリストを取得
+        df1=df[section.sectionList1] #section.pyから列名のリストを取得
     exceldata[fname]=df1
 
 # 学生毎にデータ抽出とグラフ出力
@@ -79,4 +77,4 @@ for userid in targets:
         print(data4)
 
         list_data.append(data4)
-    output_graph(flist,list_data,userid,secList.copy())
+    output_graph(flist,list_data,userid)
