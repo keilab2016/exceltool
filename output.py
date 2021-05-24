@@ -9,10 +9,10 @@ import itertools
 import math
 from make_plt import make_plt 
 
-def output_graph(flist,list_data,userid):
+def output_graph(flist,list_data,userid,secList):
     num = len(list_data)
-    title = section.sectionList.pop(0)
-    left = section.sectionList
+    title = secList.pop(0)
+    left = secList
     print(left)
     print(userid)
 

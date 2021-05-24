@@ -41,16 +41,23 @@ for a ,b in enumerate(args_list):
         if(files[i]!=''): #20〇〇年○期のデータが存在する場合
             fname = files[i].replace(input_path,'')
             fname = fname.replace('_回答データ','')
-            flist.append(fname.replace('.xls',''))
-            df=pd.read_excel('%s'%files[i],header=5)
-            if(section.sectionList[0] != '# ユーザID'):  #複数グラフを作る場合、sectionリストの要素が減り続けるのを防ぐ
-                section.sectionList.insert(0,'# ユーザID')
+            print(fname)
+            if fname.endswith('.xlsx'):
+                flist.append(fname.replace('.xlsx',''))
+                df=pd.read_excel('%s'%files[i])
+            else:
+                flist.append(fname.replace('.xls',''))
+                df=pd.read_excel('%s'%files[i],header=5)
             try:
-                df1=df[section.sectionList] #section.pyから列名のリストを取得
+                secList=section.sectionList.copy()
+                df1=df[secList] #section.pyから列名のリストを取得
+                #excelをdataframe化したdf1とuseridが一致するものをdataframe型で抽出
+                data=df1[df1['ユーザ名'].isin(['b' + userid])]
             except KeyError:
-                df1=df[section.sectionList1] #section.pyから列名のリストを取得
-            #excelをdataframe化したdf1とuseridが一致するものをdataframe型で抽出
-            data=df1[df1['# ユーザID'].isin(['b' + userid])]
+                secList=section.sectionList1.copy()
+                df1=df[secList] #section.pyから列名のリストを取得
+                #excelをdataframe化したdf1とuseridが一致するものをdataframe型で抽出
+                data=df1[df1['# ユーザID'].isin(['b' + userid])]
 
             #data(dataframe型)をlist化（２次元配列になってしまう）
             data2=data.values.tolist()
@@ -58,16 +65,18 @@ for a ,b in enumerate(args_list):
             #1次元配列に戻す
             data3=list(itertools.chain.from_iterable(data2))
 
-            #配列の0番（userid）を削除
-            del data3[0]
-
-            #0をNoneに置き換える
             data4 = []
-            for d in data3:
-                if(d == 0):
-                    data4.append(None)
-                else:
-                    data4.append(d % 8)
+            if len(data3)==0:
+                data4 = [np.nan,np.nan,np.nan,np.nan,np.nan,np.nan,np.nan]
+            else:
+                #配列の0番（userid）を削除
+                del data3[0]
+                #0をNoneに置き換える
+                for d in data3:
+                    if(d == 0):
+                        data4.append(None)
+                    else:
+                        data4.append(d % 8)
 
             print(data4)
 
@@ -75,4 +84,4 @@ for a ,b in enumerate(args_list):
         #else: #データが存在しない場合
         #    list_data.append([None,None,None,None,None,None,None])
     print(flist,list_data)
-    output_graph(flist,list_data,userid)
+    output_graph(flist,list_data,userid,secList)
