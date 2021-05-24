@@ -61,10 +61,7 @@ for userid in targets:
             data=df1[df1['# ユーザID'].isin(['b' + userid])]
 
         #data(dataframe型)をlist化（２次元配列になってしまう）
-        data2=data.values.tolist()
-
-        #1次元配列に戻す
-        data3=list(itertools.chain.from_iterable(data2))
+        data3=data.values.tolist()[0]
 
         data4 = []
         if len(data3)==0:
