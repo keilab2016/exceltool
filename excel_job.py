@@ -49,7 +49,7 @@ for path in input_from_excel():
 
 # 学生毎にデータ抽出とグラフ出力
 for userid in targets:
-    print(userid)
+    print(userid, flush=True)
     list_data=[]
     for fname in exceldata:
         df1=copy.deepcopy(exceldata[fname])
@@ -59,7 +59,10 @@ for userid in targets:
             data=df1[df1['# ユーザID'].isin(['b' + userid])]
 
         #data(dataframe型)をlist化（２次元配列になってしまう）
-        data3=data.values.tolist()[0]
+        if data.empty:
+            data3=[]
+        else:
+            data3=data.values.tolist()[0]
 
         data4 = []
         if len(data3)==0:
