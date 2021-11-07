@@ -10,6 +10,7 @@ import openpyxl
 import os
 import re
 import copy
+import xlrd
 
 #ディレクトリが存在していなければ作成
 if(os.path.exists('image') == False):
@@ -34,13 +35,19 @@ for path in input_from_excel():
     if fname.endswith('.xlsx'):
         # Moodle
         flist.append(fname.replace('.xlsx',''))
-        df=pd.read_excel('%s' % path)
-        print('Moodle',path)
+        try:
+            df=pd.read_excel('%s' % path)
+            print('Moodle',path)
+        except xlrd.biffh.XLRDError:
+            print('Moodle',path,'Unsupported or Corrupt file')
     else:
         # manaba
         flist.append(fname.replace('.xls',''))
-        df=pd.read_excel('%s' % path, header=5)
-        print('manaba',path)
+        try:
+            df=pd.read_excel('%s' % path, header=5)
+            print('manaba',path)
+        except xlrd.biffh.XLRDError:
+            print('manaba',path,'Unsupported or Corrupt file')
     try:
         df1=df[section.sectionList] #section.pyから列名のリストを取得
     except KeyError:
@@ -77,7 +84,7 @@ for userid in targets:
                 else:
                     data4.append(d % 8)
 
-        print(data4)
+        #print(data4)
 
         list_data.append(data4)
     output_graph(flist,list_data,userid)
