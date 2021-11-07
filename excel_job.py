@@ -84,7 +84,7 @@ for userid in targets:
                 else:
                     data4.append(d % 8)
 
-        print(data4)
+        #print(data4)
 
         list_data.append(data4)
     output_graph(flist,list_data,userid)
