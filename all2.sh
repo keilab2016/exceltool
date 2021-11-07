@@ -1,7 +1,9 @@
 #!/bin/sh
 STUDENTLIST=student-list.txt
-if [ $# -gt 0 -a -f $1 ]; then
+if [ $# -gt 0 ]; then
+  if [ -f $1 ]; then
 	STUDENTLIST=$1
+  fi
 fi
 if [ "$(uname)" == "Darwin" ]; then
         CMD=python3
