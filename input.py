@@ -5,8 +5,8 @@ input_path='Templete/'
 def input_from_excel(): #入学年を取得し、読み込むデータを決定
     files=[]
     last_files=[]
-    for f in os.listdir(input_path):
-        if os.path.isfile(input_path + f):
+    for f in sorted(os.listdir(input_path)):
+        if os.path.isfile(input_path + f) and not f.startswith('.'):
             if '卒業' in f:
                 last_files.append(input_path + f)
             else:
