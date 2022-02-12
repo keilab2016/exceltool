@@ -48,10 +48,25 @@ for path in input_from_excel():
             print('manaba',path)
         except xlrd.biffh.XLRDError:
             print('manaba',path,'Unsupported or Corrupt file')
+    error=0
     try:
-        df1=df[section.sectionList] #section.pyから列名のリストを取得
-    except KeyError:
         df1=df[section.sectionList1] #section.pyから列名のリストを取得
+    except KeyError:
+        error=1
+    if error!=0:
+        error=0
+        try:
+            df1=df[section.sectionList2] #section.pyから列名のリストを取得
+        except KeyError:
+            error=1
+    if error!=0:
+        error=0
+        try:
+            df1=df[section.sectionList3] #section.pyから列名のリストを取得
+        except KeyError:
+            error=1
+    if error!=0:
+        print('アンケート回答データの読み込みエラー', fname)
     exceldata[fname]=df1
 
 # 学生毎にデータ抽出とグラフ出力
