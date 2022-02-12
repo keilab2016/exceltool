@@ -31,7 +31,8 @@ exceldata={}
 flist=[]
 for path in input_from_excel():
     fname = path.replace(input_path,'')
-    fname = fname.replace('_回答データ','')
+    #fname = fname.replace('_回答データ','')
+    fname = fname[0:fname.find('_')] # ファイル名から _ 以降を削除
     if fname.endswith('.xlsx'):
         # Moodle
         flist.append(fname.replace('.xlsx',''))
