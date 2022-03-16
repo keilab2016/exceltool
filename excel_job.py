@@ -34,6 +34,7 @@ for path in input_from_excel():
     #fname = fname.replace('_回答データ','')
     if fname.endswith('.xlsx'):
         # Moodle
+        fname = fname[0:fname.find('_')] # ファイル名から _ 以降を削除
         flist.append(fname.replace('.xlsx',''))
         try:
             df=pd.read_excel('%s' % path)
@@ -42,13 +43,13 @@ for path in input_from_excel():
             print('Moodle',path,'Unsupported or Corrupt file')
     else:
         # manaba
+        fname = fname[0:fname.find('_')] # ファイル名から _ 以降を削除
         flist.append(fname.replace('.xls',''))
         try:
             df=pd.read_excel('%s' % path, header=5)
             print('manaba',path)
         except xlrd.biffh.XLRDError:
             print('manaba',path,'Unsupported or Corrupt file')
-    fname = fname[0:fname.find('_')] # ファイル名から _ 以降を削除
     error=0
     try:
         df1=df[section.sectionList1] #section.pyから列名のリストを取得
