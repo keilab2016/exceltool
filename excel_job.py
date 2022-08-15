@@ -22,14 +22,18 @@ if(os.path.exists('output') == False):
 # コマンド引数から学籍番号(複数)を取得
 args = sys.argv
 targets=[]
+year=9999;
 for a in range(1,len(args)):
     userid=re.sub(r'^b','',args[a])
     targets.append(userid.rstrip())
+    if userid.startswith('10'):
+        n = int(userid[0:4])
+        year = min(year, n + 1000)
 
 # アンケート回答データの読み込み
 exceldata={}
 flist=[]
-for path in input_from_excel():
+for path in input_from_excel(year):
     fname = path.replace(input_path,'')
     #fname = fname.replace('_回答データ','')
     if fname.endswith('.xlsx'):
