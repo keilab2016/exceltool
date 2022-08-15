@@ -24,7 +24,7 @@ args = sys.argv
 targets=[]
 for a in range(1,len(args)):
     userid=re.sub(r'^b','',args[a])
-    targets.append(userid)
+    targets.append(userid.rstrip())
 
 # アンケート回答データの読み込み
 exceldata={}
